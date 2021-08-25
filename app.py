@@ -29,7 +29,7 @@ def new_data():
         name = request.form['name']
         cur.execute(f'''insert into testdb (id, name) values ({id}, "{name}")''')
         db.connection.commit()
-        return redirect('/')
+        return redirect('/df')
     else:
         return render_template('form.html')
 
@@ -39,9 +39,10 @@ def visualize():
     cur.execute('''SELECT * FROM testdb''')
     table = cur.fetchall()
     df_pd = pd.DataFrame(table, columns=['ID','Name'])
-    # df_pd.index.name = None
+    df_display = df_pd
+    # df_display.index.name = None
     # df_display = df_pd.to_html() 
-    return render_template('df.html', table = df_pd.to_html(classes="table table-dark", justify='left'))
+    return render_template('df.html', table = df_display.to_html(classes="table table-bordered table-success table-hover", justify='left'))
 
 
 
