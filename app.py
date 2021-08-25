@@ -1,5 +1,6 @@
 from flask import Flask, request, redirect, render_template
 from flask_mysqldb import MySQL
+import pandas as pd
 
 
 app = Flask(__name__)
@@ -10,7 +11,7 @@ app.config['MYSQL_USER'] = 'root'
 app.config['MYSQL_PASSWORD'] = 'Kokomo007&'
 app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_DB'] = 'localflask'
-app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
+# app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
 
 db = MySQL(app)
 
@@ -36,12 +37,15 @@ def new_data():
 def visualize():
     cur = db.connection.cursor()
     cur.execute('''SELECT * FROM testdb''')
-    img = cur.fetchall()
-    print(img)
-    print(type(img))
-    return render_template('df.html', img = img)
+    table = cur.fetchall()
+    df_pd = pd.DataFrame(table, columns=['ID','Name'])
+    # df_pd.index.name = None
+    # df_display = df_pd.to_html() 
+    return render_template('df.html', table = df_pd.to_html(classes="table table-dark", justify='left'))
 
 
 
 if __name__== "__main__":
     app.run(debug=True)
+
+

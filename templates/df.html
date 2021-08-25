@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block head %} 
-
+    <link rel=stylesheet type=text/css href="{{ url_for('static', filename='main.css') }}">
 {% endblock %}
 
 
@@ -13,6 +13,8 @@
 <div>
 <h2 style="display: inline;">All posts board</h2>
 
-<p>{{img}}</p>
+<table class="table table-dark">
+{{table|safe}}
+</table>
 
 {% endblock %}
