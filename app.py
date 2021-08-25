@@ -1,7 +1,8 @@
 from flask import Flask, request, redirect, render_template
 from flask_mysqldb import MySQL
 import pandas as pd
-
+import matplotlib.pyplot as plt
+import numpy as n
 
 app = Flask(__name__)
 
@@ -43,6 +44,16 @@ def visualize():
     # df_display.index.name = None
     # df_display = df_pd.to_html() 
     return render_template('df.html', table = df_display.to_html(classes="table table-bordered table-success table-hover", justify='left'))
+
+@app.route('/graphs')
+def graphical():
+    x = np.arange(0, 10, 0.1)
+    y = np.sin(x)
+    plt.plot(x, y)
+    plt.savefig('images/graph.jpg')   # save the figure to file
+    plt.close(plt)  
+    return render_template('graph.html')
+
 
 
 
