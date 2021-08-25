@@ -1,0 +1,1 @@
+alert("Another day is comng)")

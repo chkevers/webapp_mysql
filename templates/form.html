@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block head %} 
+
+{% endblock %}
+
+
+{% block body %}
+ <h1>New Post</h1>
+
+<hr>
+<h2>New Post:</h2>
+<form action='/form' method='POST'>
+    <label for="id">ID</label> 
+
+    <input class="form-control" type="text" name="id" id="id" placeholder="Type your id" aria-label="Type your id">
+    <br>
+
+    <label for="name">Name</label> 
+    <input class="form-control" type="text" name="name" id="name" placeholder="Type your name" aria-label="Type your name">
+    <br>
+
+    <br>
+
+
+    <input type='submit' value='Save'>
+</form>
+<hr>
+
+    
+{% endblock %}
